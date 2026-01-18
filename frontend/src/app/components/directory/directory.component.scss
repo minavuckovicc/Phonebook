@@ -1,0 +1,52 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    margin-left: 10px;
+}
+
+.menuBtns {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.signOutBtn{
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+}
+
+.profileBtn {
+    margin-right: 10px;
+}
+
+.dir-view-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.directory-search {
+    margin-left: 50px;
+}
+
+.directory{
+    display: flex;
+    flex-direction: column;
+    padding-right: 42px;
+    max-width: 800px;
+    max-height: 600px;
+    overflow-y: auto;
+    background-color: #c77100a4;
+    border: 2px solid #613700a4;
+}
+
+.user-view{
+    background-color: #c77100a4;
+    border: 2px solid #613700a4;
+    padding: 10px;
+    margin-right: 35px;
+    max-height: fit-content;
+}

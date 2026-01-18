@@ -1,0 +1,123 @@
+<div class="menu">
+    <h2 class="title">Profil</h2>
+    <div class="menuBtns">
+        <button [routerLink]="['', { outlets: { home: ['directory'] } }]" class="backBtn">Nazad</button>
+        <button (click)="onSignOut()" class="signOutBtn">Odjavi se</button>
+    </div>
+</div>
+<div class="main" *ngIf="user">
+    <form #form="ngForm" >
+        <div class="form">
+                <div class="form-row">
+                    <label>Ime:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input 
+                        #firstNameInput="ngModel"
+                        ngModel
+                        type="text"
+                        name="firstName" 
+                        required
+                        class="input"
+                        placeholder={{user.firstName}}
+                        >
+                    </div>
+                </div>
+                <div class="form-row" >
+                    <label>Prezime:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input 
+                        #lastNameInput="ngModel"
+                        ngModel
+                        type="text"
+                        name="lastName" 
+                        required
+                        class="input"
+                        placeholder={{user.lastName}}
+                        >
+                    </div>
+                </div>
+            <div class="form-row" >
+                <label>Email:</label>
+                <div style="display: flex; flex-direction: column;">
+                    <input 
+                    #emailInput="ngModel"
+                    ngModel
+                    type="email"
+                    name="email" 
+                    required
+                    disabled="true"
+                    class="input"
+                    placeholder={{user.email}}
+                    >
+                </div>
+            </div>
+            <div class="form-row birthDateLabel" >
+                <label>Datum rodjenja:</label>
+            </div>
+            <mat-form-field>
+                <mat-label *ngIf="this.user.additionalInfos.birthDate">{{setInputDateValue()}}</mat-label>
+                <mat-label *ngIf="!this.user.additionalInfos.birthDate"></mat-label>
+                <input #birthDateInput="ngModel"
+                ngModel
+                name="birthDate"
+                matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            <div class="form-row" >
+                <label>Opis:</label>
+                <div style="display: flex; flex-direction: column;" *ngIf="user.additionalInfos">
+                    <textarea 
+                    #descriptionInput="ngModel"
+                    ngModel
+                    type="text"
+                    name="description" 
+                    required
+                    class="input description"
+                    placeholder={{user.additionalInfos.description}}
+                    ></textarea>
+                </div>
+                <div style="display: flex; flex-direction: column;" *ngIf="!user.additionalInfos">
+                    <textarea 
+                    #descriptionInput="ngModel"
+                    ngModel
+                    type="text"
+                    name="description" 
+                    required
+                    class="input description"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="form-row" >
+                <label>Brojevi telefona:</label>
+                <div style="display: flex; flex-direction: column;" class="phoneNumbers">
+                    <ul *ngFor="let phone of user.phones">
+                        <li>
+                            {{phone.number}}
+                            <button 
+                            (click)="onRemove(phone.id)" 
+                            class="removePhoneBtn" 
+                            >x</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="addPhoneNumber">
+                <input
+                #phoneNumberInput="ngModel"
+                ngModel
+                type="text"
+                name="phoneNumber"
+                placeholder="Dodaj novi broj telefona"
+                >
+                <button (click)="onAdd()">Dodaj</button>
+            </div>
+            <div class="submitBtns">
+                <button class="cancelBtn form-row" (click)="onCancel()">Otkaži</button>
+                <button class="updateBtn form-row" (click)="onUpdate()">Izmeni</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
+

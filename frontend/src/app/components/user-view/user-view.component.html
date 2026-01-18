@@ -1,0 +1,28 @@
+<div *ngIf="user">
+    <h2>Korisničke informacije</h2>
+    <label class="label">Ime:</label>
+    <label>{{user.firstName}}</label><br><br>
+    <label class="label">Prezime:</label>
+    <label>{{user.lastName}}</label><br><br>
+    <label class="label">Email:</label>
+    <label>{{user.email}}</label><br><br>
+    <label class="label">Datum rodjenja:</label>
+    <label *ngIf="user.additionalInfos">{{getDateString()}}</label><br><br>
+    <label class="label">Opis:</label><br><br>
+    <div *ngIf="user.additionalInfos.description">
+        
+        <textarea disabled="true" class="description">{{user.additionalInfos.description}}</textarea><br><br>
+    </div>
+    <label class="label">Brojevi telefona:</label>
+    <div *ngIf="user.phones" >
+        <ul *ngFor="let phone of user.phones">
+            <li>{{phone.number}}</li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="!user">
+    <h2>Korisničke informacije</h2><br>
+    <label>Kliknite na odgovarajućeg</label><br>
+    <label>korisnika za prikaz informacija</label><br>
+    <label>o istom!</label>
+</div>

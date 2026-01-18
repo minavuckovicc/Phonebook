@@ -1,0 +1,93 @@
+
+<div class="main">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form">
+            <div *ngIf="submissionType === 'register'">
+                <div class="form-row">
+                    <label>Ime:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input 
+                        #firstNameInput="ngModel"
+                        ngModel
+                        type="text"
+                        name="firstName" 
+                        required
+                        class="input"
+                        >
+                        <label 
+                        class="input-error"
+                        *ngIf="!firstNameInput.valid && firstNameInput.touched"
+                        >Unesite ime</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="submissionType === 'register'">
+                <div class="form-row" >
+                    <label>Prezime:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input 
+                        #lastNameInput="ngModel"
+                        ngModel
+                        type="text"
+                        name="lastName" 
+                        required
+                        class="input"
+                        >
+                        <label 
+                        class="input-error"
+                        *ngIf="!lastNameInput.valid && lastNameInput.touched"
+                        >Unesite prezime</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row" >
+                <label>Email:</label>
+                <div style="display: flex; flex-direction: column;">
+                    <input 
+                    #emailInput="ngModel"
+                    ngModel
+                    type="email"
+                    name="email" 
+                    required
+                    class="input"
+                    >
+                    <label 
+                    class="input-error"
+                    *ngIf="!emailInput.valid && emailInput.touched"
+                    >Unesite email</label>
+                </div>
+            </div>
+            <div class="form-row" >
+                <label>Lozinka:</label>
+                <div style="display: flex; flex-direction: column;">
+                    <input 
+                    #passwordInput="ngModel"
+                    ngModel
+                    type="password"
+                    name="password" 
+                    required
+                    class="input"
+                    >
+                    <label 
+                    class="input-error"
+                    *ngIf="!passwordInput.valid && passwordInput.touched"
+                    >Unesite lozinku</label>
+                </div>
+            </div>
+            <button 
+            [disabled]="!form.valid" 
+            type="submit"
+            class="dugme form-row"
+            >
+                {{ submissionType === 'login' ? 'Uloguj se' : 'Registruj se' }}
+            </button>
+        </div>
+    </form>
+    <div>
+        {{ submissionType === 'login' ? 'Nemate nalog' : 'Imate nalog' }} -
+        <label class="log-reg-switch-button" (click)="toggleText()">
+            {{ submissionType === 'login' ? 'Registruj se' : 'Uloguj se' }}
+        </label>
+    </div>
+</div>
+

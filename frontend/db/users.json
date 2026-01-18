@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "firstName": "Dusan",
+            "lastName": "Vuckovic",
+            "phoneNumber": "0637742680",
+            "email": "dusanvuckovic@gmail.com"
+        },
+        {
+            "id": 2,
+            "firstName": "Mina",
+            "lastName": "Vuckovic",
+            "phoneNumber": "0628912349",
+            "email": "minavuckovic@gmail.com"
+        },
+        {
+            "id": 3,
+            "firstName": "Anita",
+            "lastName": "Vuckovic",
+            "phoneNumber": "0638112013",
+            "email": "anitavuckovic@gmail.com"
+        }
+       
+    ]
+}

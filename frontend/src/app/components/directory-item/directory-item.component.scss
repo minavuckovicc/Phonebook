@@ -1,0 +1,22 @@
+.directory-item-div{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding-left: 10px;
+    cursor: pointer;
+    background-color: beige;
+}
+
+.directory-item-div:hover{
+    background-color: rgb(209, 209, 188);
+}
+
+.directory-item-picture {
+    width: 32px;
+    height: 32px;
+}
+
+.directory-item-info {
+    padding-left: 15px;
+    padding-right: 15px;
+}

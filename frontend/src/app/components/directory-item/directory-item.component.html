@@ -1,0 +1,4 @@
+<div class="directory-item-div" *ngIf="user" (click)="clicked()">
+    <img src="../../../assets/user.png" class="directory-item-picture" />
+    <p class="directory-item-info">{{user.firstName}} {{user.lastName}} -- {{user.email}}</p>
+</div>
