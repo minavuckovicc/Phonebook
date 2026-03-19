@@ -4,8 +4,9 @@ import { PhoneDto } from 'src/dto/phone.dto';
 import { UserDto } from 'src/dto/user.dto';
 import { AdditionalInfos } from 'src/entities/additional-infos.entity';
 import { Phone } from 'src/entities/phone.entity';
-import { User } from 'src/entities/user.entity';
+import { User, UserRole } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -27,14 +28,34 @@ export class UsersService {
             relations: { additionalInfos: true, phones: true }
         });
     }
-
+//koristim DTO da bi back mogao da kontrolise koje podatke prihvata sa fronta
     public async create(userDto: UserDto){
-        const user = this.userRepository.create(userDto);
+        const hashedPassword = userDto.password ? await bcrypt.hash(userDto.password, 12) : null;
+        const user = this.userRepository.create({
+            ...userDto,
+            password: hashedPassword ?? undefined,
+            role: UserRole.USER,
+            additionalInfos: userDto.additionalInfos ?? {},
+            phones: userDto.phones ?? [],
+        });
         return await this.userRepository.save(user);
     }
 
     public async delete(id: number){
-        return await this.userRepository.delete(id);
+        const user = await this.getById(id);
+        if (!user) return;
+
+        const phoneIds = (user.phones ?? []).map((p) => p.id);
+        const addInfosId = user.additionalInfos?.id;
+
+        if (phoneIds.length) {
+            await this.phoneRepository.delete(phoneIds);
+        }
+        await this.userRepository.delete(id);
+        if (addInfosId) {
+            await this.addInfosRepository.delete(addInfosId);
+        }
+        return;
     }
 
     public async update(userId: number, addInfosId: number, dto: UserDto){

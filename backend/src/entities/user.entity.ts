@@ -2,6 +2,11 @@ import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn
 import { AdditionalInfos } from "./additional-infos.entity";
 import { Phone } from "./phone.entity";
 
+export enum UserRole {
+    USER = "USER",
+    ADMIN = "ADMIN",
+}
+
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -18,6 +23,12 @@ export class User {
 
     @Column({ nullable: true, select: false })
     password: string;
+
+    @Column({
+        type: "varchar",
+        default: UserRole.USER,
+    })
+    role: UserRole;
 
     @OneToOne(() => AdditionalInfos, { cascade: true })
     @JoinColumn()
