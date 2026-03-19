@@ -16,8 +16,21 @@
     <label class="label">Brojevi telefona:</label>
     <div *ngIf="user.phones" >
         <ul *ngFor="let phone of user.phones">
-            <li>{{phone.number}}</li>
+            <li>
+                {{phone.number}}
+                <button *ngIf="isAdmin" type="button" (click)="removePhoneFromSelected(phone.id)">Obriši broj</button>
+            </li>
         </ul>
+    </div>
+
+    <div *ngIf="isAdmin">
+        <br>
+        <label>Dodaj broj telefona</label><br>
+        <input [(ngModel)]="phoneNumberDraft" name="phoneNumberDraft" /><br><br>
+        <button type="button" (click)="addPhoneToSelected()">Dodaj broj</button>
+        <br>
+        <button *ngIf="!isEditing" type="button" (click)="startEdit()">Izmeni kontakt</button>
+        <button type="button" [disabled]="loggedUser?.id === user.id" (click)="deleteSelectedUser()">Obriši kontakt</button>
     </div>
 </div>
 <div *ngIf="!user">
@@ -26,3 +39,88 @@
     <label>korisnika za prikaz informacija</label><br>
     <label>o istom!</label>
 </div>
+
+<form *ngIf="isAdmin" #adminForm="ngForm" class="adminForm">
+    <div *ngIf="isEditing && user" class="form">
+        <h3>Izmena kontakta</h3>
+
+        <div class="form-row">
+            <label>Ime:</label>
+            <input class="input" name="firstName" ngModel [placeholder]="user.firstName" />
+        </div>
+
+        <div class="form-row">
+            <label>Prezime:</label>
+            <input class="input" name="lastName" ngModel [placeholder]="user.lastName" />
+        </div>
+
+        <div class="form-row birthDateLabel">
+            <label>Datum rodjenja:</label>
+        </div>
+        <mat-form-field class="dateField">
+            <mat-label *ngIf="user.additionalInfos?.birthDate">{{setSelectedInputDateValue()}}</mat-label>
+            <mat-label *ngIf="!user.additionalInfos?.birthDate"></mat-label>
+            <input ngModel name="birthDate" matInput [matDatepicker]="editPicker">
+            <mat-datepicker-toggle matIconSuffix [for]="editPicker"></mat-datepicker-toggle>
+            <mat-datepicker #editPicker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="form-row">
+            <label>Opis:</label>
+        </div>
+        <textarea class="descriptionInput" name="description" ngModel [placeholder]="user.additionalInfos?.description"></textarea>
+
+        <div class="submitBtns">
+            <button type="button" (click)="cancelEdit()">Otkaži</button>
+            <button type="button" (click)="saveEdit()">Sačuvaj</button>
+        </div>
+    </div>
+
+    <div *ngIf="showCreateForm" class="form">
+        <h3>Dodaj novi kontakt</h3>
+
+        <div class="form-row">
+            <label>Ime:</label>
+            <input class="input" name="newFirstName" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label>Prezime:</label>
+            <input class="input" name="newLastName" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label>Email:</label>
+            <input class="input" name="newEmail" ngModel />
+        </div>
+
+        <div class="form-row birthDateLabel">
+            <label>Datum rodjenja:</label>
+        </div>
+        <mat-form-field class="dateField">
+            <input ngModel name="newBirthDate" matInput [matDatepicker]="newPicker">
+            <mat-datepicker-toggle matIconSuffix [for]="newPicker"></mat-datepicker-toggle>
+            <mat-datepicker #newPicker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="form-row">
+            <label>Opis:</label>
+        </div>
+        <textarea class="descriptionInput" name="newDescription" ngModel></textarea>
+
+        <div class="form-row">
+            <label>Broj telefona:</label>
+            <input class="input" name="newPhoneNumber" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label>Lozinka:</label>
+            <input class="input" name="newPassword" type="password" ngModel />
+        </div>
+
+        <div class="submitBtns">
+            <button type="button" (click)="closeCreateUser()">Otkaži</button>
+            <button type="button" (click)="addNewUser()">Dodaj</button>
+        </div>
+    </div>
+</form>

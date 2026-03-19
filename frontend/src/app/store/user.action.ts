@@ -15,3 +15,4 @@ export const updateUser = createAction("Update user", props<{ userId: number, ad
 export const updateUserSuccess = createAction("Update user Success", props<{ user: User }>());
 export const searchUsers = createAction("Search users", props<{ text: string }>());
 export const searchUsersSuccess = createAction("Search users Success", props<{ users: User[], text: string }>());
+export const setShowCreateForm = createAction("Set show create user form", props<{ show: boolean }>());

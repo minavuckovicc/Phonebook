@@ -4,6 +4,7 @@ import { AppState } from 'src/app/app.state';
 import { loadUsers, loggedUser } from 'src/app/store/user.action';
 import jwt_decode from 'jwt-decode';
 import { UserResponse } from 'src/app/models/userResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +12,24 @@ import { UserResponse } from 'src/app/models/userResponse';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadUsers());
     const value = localStorage.getItem('token');
-    const decodedToken: UserResponse = jwt_decode(value!);
+    if (!value) {
+      this.router.navigateByUrl('/auth');
+      return;
+    }
+    const decodedToken: UserResponse = jwt_decode(value);
     this.store.dispatch(
       loggedUser({
         user: decodedToken.user
       })
     );
+
+    // Ensure directory outlet is shown when entering /home directly.
+    this.router.navigateByUrl(`/home(home:directory)`);
   }
 
 }

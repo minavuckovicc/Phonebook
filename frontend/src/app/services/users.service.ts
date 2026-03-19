@@ -20,6 +20,41 @@ export class UsersService {
     .get<User[]>(evnironment.api + "/users");
   }
 
+  createUser(payload: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    birthDate?: string;
+    description?: string;
+    phoneNumbers?: string[];
+  }): Observable<User> {
+    return this.httpClient
+    .post<User>(
+      `${evnironment.api}/users`,
+      {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        password: payload.password,
+        additionalInfos: {
+          birthDate: payload.birthDate ?? null,
+          description: payload.description ?? "",
+        },
+        phones: (payload.phoneNumbers ?? [])
+          .filter((p) => !!p)
+          .map((p) => ({ number: p })),
+      },
+      this.httpOptions
+    ).pipe(take(1));
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.httpClient
+    .delete(`${evnironment.api}/users/${userId}`)
+    .pipe(take(1));
+  }
+
   addPhoneNumber(userId: number, phoneNumber: string): Observable<User> {
     return this.httpClient
     .post<User>(

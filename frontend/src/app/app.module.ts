@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from './components/directory/directory.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { DirectoryItemComponent } from './components/directory-item/directory-item.component';
 import { StoreModule } from '@ngrx/store';
@@ -23,6 +23,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { HomeComponent } from './components/home/home.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -49,7 +50,13 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     FormsModule,
     BrowserAnimationsModule,MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,7 +24,7 @@ export class UsersEffects {
             ofType(UsersActions.addPhoneNumber),
             mergeMap(({ userId, phoneNumber }) => 
                 this.usersService.addPhoneNumber(userId, phoneNumber).pipe(
-                    tap((user) => {}), // mozda fja da se azurira localStorage??
+                    tap((user) => {}), 
                     map((user) => (UsersActions.addPhoneNumberSuccess({ user }))),
                     catchError(() => of({ type: 'add phone error' }))
                 )

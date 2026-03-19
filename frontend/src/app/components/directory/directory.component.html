@@ -1,6 +1,7 @@
 <div class="menu">
-    <h2 class="title">Imenik</h2>
+    <h1 class="title">Imenik</h1>
     <div class="menuBtns">
+        <button *ngIf="isAdmin" (click)="onOpenCreateUser()" class="profileBtn">Dodaj korisnika</button>
         <button [routerLink]="['', { outlets: { home: ['profile'] } }]" class="profileBtn">Profil</button>
         <button (click)="onSignOut()" class="signOutBtn">Odjavi se</button>
     </div>

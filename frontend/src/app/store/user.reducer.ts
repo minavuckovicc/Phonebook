@@ -7,6 +7,7 @@ export interface UsersState extends EntityState<User> {
     selectedUser: number;
     loggedUser: User | null;
     searchBarValue: string;
+    showCreateForm: boolean;
 }
 
 export const adapter = createEntityAdapter<User>();
@@ -14,7 +15,8 @@ export const adapter = createEntityAdapter<User>();
 export const initialState: UsersState = adapter.getInitialState({
     selectedUser: 0,
     loggedUser: null,
-    searchBarValue: ""
+    searchBarValue: "",
+    showCreateForm: false,
 });
 
 export const usersReducer = createReducer(
@@ -22,7 +24,8 @@ export const usersReducer = createReducer(
     on(Actions.selectUser, (state, {userId}) => {
         return {
             ...state,
-            selectedUser: userId
+            selectedUser: userId,
+            showCreateForm: false,
         };
     }),
     on(Actions.loggedUser, (state, {user}) => {
@@ -63,4 +66,8 @@ export const usersReducer = createReducer(
     on(Actions.searchUsersSuccess, (state, {users, text}) => 
         adapter.setAll(users, {...state, searchBarValue: text})
     ),
+    on(Actions.setShowCreateForm, (state, { show }) => ({
+        ...state,
+        showCreateForm: show,
+    })),
 );
