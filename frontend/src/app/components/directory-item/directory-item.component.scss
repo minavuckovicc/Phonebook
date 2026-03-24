@@ -1,22 +1,49 @@
 .directory-item-div{
     display: flex;
     align-items: center;
-    border: 1px solid black;
-    padding-left: 10px;
+    border: 1px solid #d7e1ec;
+    border-radius: 10px;
+    padding: 10px 12px;
     cursor: pointer;
-    background-color: beige;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2px;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .directory-item-div:hover{
-    background-color: rgb(209, 209, 188);
+    background-color: #f5f9ff;
+    box-shadow: 0 6px 14px rgba(53, 120, 198, 0.18);
+    transform: translateY(-1px);
 }
 
 .directory-item-picture {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #d7e1ec;
+    padding: 4px;
+    background: #f7fbff;
 }
 
 .directory-item-info {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 14px;
+    padding-right: 8px;
+    min-width: 0;
+}
+
+.directory-item-name {
+    margin: 0;
+    color: #213547;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.directory-item-email {
+    margin: 2px 0 0;
+    color: #5b7086;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

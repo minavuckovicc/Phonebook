@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
@@ -15,6 +15,7 @@ import { selectLoggedUser, selectSelectedUser, selectShowCreateForm } from 'src/
   styleUrls: ['./user-view.component.scss']
 })
 export class UserViewComponent implements OnInit {
+  private destroy$ = new Subject<void>();
 
   @ViewChild('adminForm') adminForm!: NgForm;
 
@@ -32,24 +33,35 @@ export class UserViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select(selectSelectedUser).subscribe((user) => {
+    this.store.select(selectSelectedUser)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
       if(user){
         this.user = user;
       }
     });
 
-    this.store.select(selectLoggedUser).subscribe((user) => {
+    this.store.select(selectLoggedUser)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
       this.loggedUser = user;
       this.isAdmin = (user?.role === 'ADMIN');
     });
 
-    this.store.select(selectShowCreateForm).subscribe((show) => {
+    this.store.select(selectShowCreateForm)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((show) => {
       this.showCreateForm = show;
       if (show) {
         this.isEditing = false;
         this.user = null;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   getDateString(): string {

@@ -1,5 +1,66 @@
-body{
-    background-color: rgba(153, 87, 0, 0.644);
+:root {
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e8eef7 100%);
+    --surface: #ffffff;
+    --surface-muted: #fdfefe;
+    --text-main: #213547;
+    --text-muted: #5b7086;
+    --border: #d7e1ec;
+    --primary: #3578c6;
+    --danger: #de4a4a;
 }
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: var(--text-main);
+    background: var(--bg-gradient);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 600;
+}
+
+button:hover {
+    opacity: 0.95;
+}
+
+input, textarea, select {
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #4f8edc;
+}
+
+/* Subtle scrollbar polish */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #c9d3e0;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #eef3f8;
+}

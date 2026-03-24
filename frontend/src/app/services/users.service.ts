@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { evnironment } from 'src/environments/environment';
-import { Observable, take } from 'rxjs';
+import { Observable, from, of, take, zip } from 'rxjs';
+import { map } from 'rxjs';
 import { UpdateUser } from '../models/updateUser';
 
 @Injectable({
@@ -16,8 +17,22 @@ export class UsersService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(){
-    return this.httpClient
-    .get<User[]>(evnironment.api + "/users");
+    // fetch API (umesto HttpClient) - demonstrira async poziv i Promise.
+    const token = localStorage.getItem('token');
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    return from(
+      fetch(evnironment.api + "/users", { headers }).then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(text || "Failed to load users");
+        }
+        return res.json() as Promise<User[]>;
+      })
+    );
   }
 
   createUser(payload: {
@@ -88,8 +103,13 @@ export class UsersService {
   }
 
   getUsersSearch(text: string){
-    return this.httpClient
-    .get<User[]>(evnironment.api + `/users/search/${text}`);
+    const users$ = this.httpClient.get<User[]>(
+      evnironment.api + `/users/search/${text}`
+    );
+    // Zip spaja dva izvora (rezultat pretrage + prosledjeni tekst) u jedan stream.
+    return zip(users$, of(text)).pipe(
+      map(([users]) => users)
+    );
   }
 
 }

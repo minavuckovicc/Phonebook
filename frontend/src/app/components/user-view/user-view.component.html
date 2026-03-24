@@ -15,34 +15,35 @@
     </div>
     <label class="label">Brojevi telefona:</label>
     <div *ngIf="user.phones" >
-        <ul *ngFor="let phone of user.phones">
+        <ul class="phoneList" *ngFor="let phone of user.phones">
             <li>
                 {{phone.number}}
-                <button *ngIf="isAdmin" type="button" (click)="removePhoneFromSelected(phone.id)">Obriši broj</button>
+                <button *ngIf="isAdmin" class="btnDangerSmall" type="button" (click)="removePhoneFromSelected(phone.id)">Obriši broj</button>
             </li>
         </ul>
     </div>
 
-    <div *ngIf="isAdmin">
+    <div *ngIf="isAdmin" class="adminActions">
         <br>
-        <label>Dodaj broj telefona</label><br>
-        <input [(ngModel)]="phoneNumberDraft" name="phoneNumberDraft" /><br><br>
-        <button type="button" (click)="addPhoneToSelected()">Dodaj broj</button>
-        <br>
-        <button *ngIf="!isEditing" type="button" (click)="startEdit()">Izmeni kontakt</button>
-        <button type="button" [disabled]="loggedUser?.id === user.id" (click)="deleteSelectedUser()">Obriši kontakt</button>
+        <label class="label">Dodaj broj telefona</label><br>
+        <div class="addPhoneRow">
+            <input class="inputInline" [(ngModel)]="phoneNumberDraft" name="phoneNumberDraft" placeholder="+381..." />
+            <button class="btnPrimary" type="button" (click)="addPhoneToSelected()">Dodaj broj</button>
+        </div>
+        <div class="adminBtns">
+            <button *ngIf="!isEditing" class="btnSecondary" type="button" (click)="startEdit()">Izmeni kontakt</button>
+            <button class="btnDanger" type="button" [disabled]="loggedUser?.id === user.id" (click)="deleteSelectedUser()">Obriši kontakt</button>
+        </div>
     </div>
 </div>
 <div *ngIf="!user">
     <h2>Korisničke informacije</h2><br>
-    <label>Kliknite na odgovarajućeg</label><br>
-    <label>korisnika za prikaz informacija</label><br>
-    <label>o istom!</label>
+    <label>Kliknite na korisnika da biste prikazali njegove informacije.</label>
 </div>
 
 <form *ngIf="isAdmin" #adminForm="ngForm" class="adminForm">
-    <div *ngIf="isEditing && user" class="form">
-        <h3>Izmena kontakta</h3>
+    <div *ngIf="isEditing && user" class="form editForm">
+        <h3 class="editTitle">Izmena kontakta</h3>
 
         <div class="form-row">
             <label>Ime:</label>
@@ -68,30 +69,30 @@
         <div class="form-row">
             <label>Opis:</label>
         </div>
-        <textarea class="descriptionInput" name="description" ngModel [placeholder]="user.additionalInfos?.description"></textarea>
+        <textarea class="descriptionInput" name="description" ngModel [placeholder]="user.additionalInfos.description"></textarea>
 
         <div class="submitBtns">
-            <button type="button" (click)="cancelEdit()">Otkaži</button>
-            <button type="button" (click)="saveEdit()">Sačuvaj</button>
+            <button type="button" class="btnSecondary" (click)="cancelEdit()">Otkaži</button>
+            <button type="button" class="btnPrimary" (click)="saveEdit()">Sačuvaj</button>
         </div>
     </div>
 
-    <div *ngIf="showCreateForm" class="form">
-        <h3>Dodaj novi kontakt</h3>
+    <div *ngIf="showCreateForm" class="form createForm">
+        <h3 class="createTitle">Dodaj novi kontakt</h3>
 
         <div class="form-row">
             <label>Ime:</label>
-            <input class="input" name="newFirstName" ngModel />
+            <input class="input" name="newFirstName" ngModel placeholder="Ime" />
         </div>
 
         <div class="form-row">
             <label>Prezime:</label>
-            <input class="input" name="newLastName" ngModel />
+            <input class="input" name="newLastName" ngModel placeholder="Prezime" />
         </div>
 
         <div class="form-row">
             <label>Email:</label>
-            <input class="input" name="newEmail" ngModel />
+            <input class="input" name="newEmail" ngModel placeholder="email@primer.com" />
         </div>
 
         <div class="form-row birthDateLabel">
@@ -106,21 +107,21 @@
         <div class="form-row">
             <label>Opis:</label>
         </div>
-        <textarea class="descriptionInput" name="newDescription" ngModel></textarea>
+        <textarea class="descriptionInput" name="newDescription" ngModel placeholder="Kratak opis kontakta..."></textarea>
 
         <div class="form-row">
             <label>Broj telefona:</label>
-            <input class="input" name="newPhoneNumber" ngModel />
+            <input class="input" name="newPhoneNumber" ngModel placeholder="+381..." />
         </div>
 
         <div class="form-row">
             <label>Lozinka:</label>
-            <input class="input" name="newPassword" type="password" ngModel />
+            <input class="input" name="newPassword" type="password" ngModel placeholder="Lozinka" />
         </div>
 
         <div class="submitBtns">
-            <button type="button" (click)="closeCreateUser()">Otkaži</button>
-            <button type="button" (click)="addNewUser()">Dodaj</button>
+            <button type="button" class="btnSecondary" (click)="closeCreateUser()">Otkaži</button>
+            <button type="button" class="btnPrimary" (click)="addNewUser()">Dodaj</button>
         </div>
     </div>
 </form>

@@ -1,21 +1,24 @@
-<div class="menu">
-    <h1 class="title">Imenik</h1>
-    <div class="menuBtns">
-        <button *ngIf="isAdmin" (click)="onOpenCreateUser()" class="profileBtn">Dodaj korisnika</button>
-        <button [routerLink]="['', { outlets: { home: ['profile'] } }]" class="profileBtn">Profil</button>
-        <button (click)="onSignOut()" class="signOutBtn">Odjavi se</button>
-    </div>
-</div>
-<div class="dir-view-div">
-    <div class="directory-search">
-        <app-search-bar></app-search-bar>
-        <div class="directory">
-            <ul *ngFor="let user of user$ | async">
-                <app-directory-item [user]="user" (onClick)="selectUser($event)"></app-directory-item>
-            </ul>
+<div class="home-page">
+    <div class="menu">
+        <h1 class="title">Imenik</h1>
+        <div class="menuBtns">
+            <button *ngIf="isAdmin" (click)="onOpenCreateUser()" class="profileBtn">Dodaj korisnika</button>
+            <button [routerLink]="['', { outlets: { home: ['profile'] } }]" class="profileBtn">Profil</button>
+            <button (click)="onSignOut()" class="signOutBtn">Odjavi se</button>
         </div>
     </div>
-    <div class="user-view">
-        <app-user-view></app-user-view>
+
+    <div class="dir-view-div">
+        <div class="directory-search panel">
+            <app-search-bar></app-search-bar>
+            <div class="directory">
+                <ul *ngFor="let user of user$ | async">
+                    <app-directory-item [user]="user" (onClick)="selectUser($event)"></app-directory-item>
+                </ul>
+            </div>
+        </div>
+        <div class="user-view panel">
+            <app-user-view></app-user-view>
+        </div>
     </div>
 </div>

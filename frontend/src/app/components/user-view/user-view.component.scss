@@ -1,12 +1,35 @@
+.adminForm,
+.form,
+.form-row,
+.label,
+.createTitle,
+.editTitle,
+.input,
+.inputInline,
+.description,
+.descriptionInput,
+.btnPrimary,
+.btnSecondary,
+.btnDanger,
+.btnDangerSmall {
+    font-family: inherit;
+}
+
 .label {
     margin-right: 10px;
     font-weight: bold;
+    color: #2f3e4e;
+    letter-spacing: 0.1px;
 }
 
 .description {
     width: 230px;
     height: 60px;
     resize: none;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-sizing: border-box;
 }
 
 .birthDateLabel {
@@ -20,8 +43,10 @@
 .form {
     display: flex;
     flex-direction: column;
-    background-color: #c77100a4;
-    border: 2px solid #613700a4;
+    background: #ffffff;
+    border: 1px solid #d7e1ec;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     padding: 12px;
     max-width: 420px;
 }
@@ -37,6 +62,16 @@
     margin-left: 10px;
     flex: 1;
     max-width: 240px;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+}
+
+.input:focus,
+.inputInline:focus {
+    border-color: #4f8edc;
+    outline: none;
 }
 
 .dateField {
@@ -48,6 +83,10 @@
     height: 70px;
     resize: none;
     margin-top: 6px;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-sizing: border-box;
 }
 
 .submitBtns {
@@ -55,4 +94,118 @@
     justify-content: flex-end;
     gap: 10px;
     margin-top: 12px;
+}
+
+.createForm {
+    border-radius: 12px;
+    border: 1px solid #d7e1ec;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.createTitle {
+    margin: 0 0 4px;
+    color: #213547;
+    font-size: 18px;
+}
+
+.editForm {
+    border-radius: 12px;
+    border: 1px solid #d7e1ec;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.editTitle {
+    margin: 0 0 4px;
+    color: #213547;
+    font-size: 18px;
+}
+
+.btnPrimary {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #3578c6;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btnSecondary {
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #fff;
+    color: #213547;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btnDanger {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #de4a4a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btnDangerSmall {
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-left: 8px;
+    background: #de4a4a;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btnPrimary:hover,
+.btnSecondary:hover,
+.btnDanger:hover,
+.btnDangerSmall:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btnDanger:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.adminActions {
+    margin-top: 8px;
+}
+
+.inputInline {
+    width: 220px;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+}
+
+.phoneList {
+    margin: 6px 0;
+    padding-left: 18px;
+    color: #2f3e4e;
+}
+
+.adminBtns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.addPhoneRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 6px;
 }

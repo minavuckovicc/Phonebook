@@ -1,52 +1,119 @@
+.home-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef7 100%);
+    padding: 20px 24px;
+}
+
 .menu {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(2px);
 }
 
 .title {
-    margin-left: 10px;
+    margin: 0;
+    color: #213547;
+    letter-spacing: 0.2px;
 }
 
 .menuBtns {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    gap: 10px;
 }
 
 .signOutBtn{
     cursor: pointer;
-    height: fit-content;
-    width: fit-content;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #de4a4a;
+    color: #ffffff;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
 }
 
 .profileBtn {
-    margin-right: 10px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #3578c6;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.profileBtn:hover,
+.signOutBtn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
 }
 
 .dir-view-div{
     display: flex;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .directory-search {
-    margin-left: 50px;
+    flex: 1;
+    min-width: 0;
 }
 
 .directory{
     display: flex;
     flex-direction: column;
-    padding-right: 42px;
-    max-width: 800px;
+    gap: 8px;
+    padding: 6px;
     max-height: 600px;
     overflow-y: auto;
-    background-color: #c77100a4;
-    border: 2px solid #613700a4;
+    border-radius: 10px;
+    border: 1px solid #d7e1ec;
+    background: #fdfefe;
+}
+
+.directory ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .user-view{
-    background-color: #c77100a4;
-    border: 2px solid #613700a4;
+    border-radius: 10px;
+    border: 1px solid #d7e1ec;
+    background: #fdfefe;
     padding: 10px;
-    margin-right: 35px;
-    max-height: fit-content;
+    width: 40%;
+    min-width: 320px;
+}
+
+.panel {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    transition: box-shadow 0.2s ease;
+}
+
+.panel:hover {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive layout for narrower screens */
+@media (max-width: 980px) {
+    .dir-view-div {
+        flex-direction: column;
+    }
+
+    .user-view {
+        width: 100%;
+        min-width: 0;
+    }
 }

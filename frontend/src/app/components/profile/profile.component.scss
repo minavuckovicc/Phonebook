@@ -1,79 +1,130 @@
+.profile-page,
+.menu,
+.title,
+.form,
+.form-row,
+.input,
+.description,
+.btnPrimary,
+.btnSecondary,
+.backBtn,
+.signOutBtn {
+    font-family: inherit;
+}
+
+.profile-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef7 100%);
+    padding: 20px 24px;
+}
+
 .menu {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    padding: 10px 16px;
+    margin-bottom: 16px;
 }
 
 .title {
-    margin-left: 10px;
+    margin: 0;
+    color: #213547;
+    letter-spacing: 0.2px;
 }
 
 .menuBtns {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    gap: 10px;
 }
 
-.signOutBtn{
+.backBtn,
+.signOutBtn {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #ffffff;
+    font-weight: 600;
     cursor: pointer;
-    height: fit-content;
-    width: fit-content;
+    transition: transform 0.15s ease, opacity 0.2s ease;
 }
 
 .backBtn {
-    margin-right: 10px;
+    background: #3578c6;
+}
+
+.signOutBtn {
+    background: #de4a4a;
+}
+
+.backBtn:hover,
+.signOutBtn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
 }
 
 .main {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 200px;
+    justify-content: center;
 }
 
 .form{
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    background-color: #c77100a4;
-    border: 2px solid #613700a4;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.dugme {
-    cursor: pointer;
-    max-width: fit-content;
-    align-self: center;
-    margin-bottom: 10px;
-}
-
-.dugme:disabled {
-    cursor: default;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 460px;
+    max-width: calc(100vw - 48px);
+    box-sizing: border-box;
 }
 
 .form-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 12px;
     margin-top: 10px;
 }
 
 .input {
-    margin-left: 10px;
+    flex: 1;
+    max-width: 100%;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.input-error {
-    margin-left: 10px;
-    color: rgb(158, 0, 0);
+.input:focus {
+    border-color: #4f8edc;
+}
+
+.dateField {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .birthDateLabel {
-    margin-bottom: 5%;
+    margin-top: 12px;
 }
 
 .description {
-    width: 230px;
-    height: 50px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 76px;
     resize: none;
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
 }
 
 .phoneNumbers {
@@ -83,23 +134,52 @@
 
 .addPhoneNumber {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
 }
 
 .removePhoneBtn {
     cursor: pointer;
-    background-color: red;
-    margin-left: 5px;
-}
-
-.removePhoneBtn:hover {
-    background-color: rgb(192, 0, 0);
+    border: none;
+    border-radius: 6px;
+    background-color: #de4a4a;
+    color: #fff;
+    margin-left: 6px;
+    padding: 2px 8px;
 }
 
 .submitBtns {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 10px;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.btnPrimary {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #3578c6;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.btnSecondary {
+    border: 1px solid #c9d3e0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #fff;
+    color: #213547;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.btnPrimary:hover,
+.btnSecondary:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
 }

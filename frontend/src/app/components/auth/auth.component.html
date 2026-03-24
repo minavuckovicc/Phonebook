@@ -1,93 +1,81 @@
+<div class="auth-page">
+    <div class="auth-card">
+        <h2 class="title">{{ submissionType === 'login' ? 'Prijava' : 'Registracija' }}</h2>
 
-<div class="main">
-    <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form">
-            <div *ngIf="submissionType === 'register'">
-                <div class="form-row">
-                    <label>Ime:</label>
-                    <div style="display: flex; flex-direction: column;">
-                        <input 
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form">
+                <div *ngIf="submissionType === 'register'" class="form-field">
+                    <label>Ime</label>
+                    <input
                         #firstNameInput="ngModel"
                         ngModel
                         type="text"
-                        name="firstName" 
+                        name="firstName"
                         required
                         class="input"
-                        >
-                        <label 
-                        class="input-error"
-                        *ngIf="!firstNameInput.valid && firstNameInput.touched"
-                        >Unesite ime</label>
-                    </div>
+                        placeholder="Unesite ime"
+                    >
+                    <label class="input-error" *ngIf="!firstNameInput.valid && firstNameInput.touched">Unesite ime</label>
                 </div>
-            </div>
-            <div *ngIf="submissionType === 'register'">
-                <div class="form-row" >
-                    <label>Prezime:</label>
-                    <div style="display: flex; flex-direction: column;">
-                        <input 
+
+                <div *ngIf="submissionType === 'register'" class="form-field">
+                    <label>Prezime</label>
+                    <input
                         #lastNameInput="ngModel"
                         ngModel
                         type="text"
-                        name="lastName" 
+                        name="lastName"
                         required
                         class="input"
-                        >
-                        <label 
-                        class="input-error"
-                        *ngIf="!lastNameInput.valid && lastNameInput.touched"
-                        >Unesite prezime</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row" >
-                <label>Email:</label>
-                <div style="display: flex; flex-direction: column;">
-                    <input 
-                    #emailInput="ngModel"
-                    ngModel
-                    type="email"
-                    name="email" 
-                    required
-                    class="input"
+                        placeholder="Unesite prezime"
                     >
-                    <label 
-                    class="input-error"
-                    *ngIf="!emailInput.valid && emailInput.touched"
-                    >Unesite email</label>
+                    <label class="input-error" *ngIf="!lastNameInput.valid && lastNameInput.touched">Unesite prezime</label>
                 </div>
-            </div>
-            <div class="form-row" >
-                <label>Lozinka:</label>
-                <div style="display: flex; flex-direction: column;">
-                    <input 
-                    #passwordInput="ngModel"
-                    ngModel
-                    type="password"
-                    name="password" 
-                    required
-                    class="input"
+
+                <div class="form-field">
+                    <label>Email</label>
+                    <input
+                        #emailInput="ngModel"
+                        ngModel
+                        type="email"
+                        name="email"
+                        required
+                        class="input"
+                        placeholder="Unesite email"
                     >
-                    <label 
-                    class="input-error"
-                    *ngIf="!passwordInput.valid && passwordInput.touched"
-                    >Unesite lozinku</label>
+                    <label class="input-error" *ngIf="!emailInput.valid && emailInput.touched">Unesite email</label>
                 </div>
+
+                <div class="form-field">
+                    <label>Lozinka</label>
+                    <input
+                        #passwordInput="ngModel"
+                        ngModel
+                        type="password"
+                        name="password"
+                        required
+                        class="input"
+                        placeholder="Unesite lozinku"
+                    >
+                    <label class="input-error" *ngIf="!passwordInput.valid && passwordInput.touched">Unesite lozinku</label>
+                </div>
+
+                <button
+                    [disabled]="!form.valid"
+                    type="submit"
+                    class="dugme"
+                >
+                    {{ submissionType === 'login' ? 'Uloguj se' : 'Registruj se' }}
+                </button>
             </div>
-            <button 
-            [disabled]="!form.valid" 
-            type="submit"
-            class="dugme form-row"
-            >
-                {{ submissionType === 'login' ? 'Uloguj se' : 'Registruj se' }}
-            </button>
+        </form>
+
+        <div class="switch-row">
+            {{ submissionType === 'login' ? 'Nemate nalog?' : 'Imate nalog?' }}
+            <span class="log-reg-switch-button" (click)="toggleText()">
+                {{ submissionType === 'login' ? 'Registruj se' : 'Uloguj se' }}
+            </span>
         </div>
-    </form>
-    <div>
-        {{ submissionType === 'login' ? 'Nemate nalog' : 'Imate nalog' }} -
-        <label class="log-reg-switch-button" (click)="toggleText()">
-            {{ submissionType === 'login' ? 'Registruj se' : 'Uloguj se' }}
-        </label>
     </div>
 </div>
 

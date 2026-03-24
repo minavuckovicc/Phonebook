@@ -10,9 +10,19 @@ export const selectUsersFeature = createSelector(
 //selector transformiše entitete u niz pogodan za prikaz u UI-ju(koristim NgRX entity)
 export const selectUsersList = createSelector(
     selectUsersFeature,
-    (users) => users.ids.map(id => users.entities[id])
-                        .filter(user => user!=null)
-                        .map((user)=><User>user)
+    (users) => {
+        const loggedUser = users.loggedUser;
+        return users.ids
+            .map(id => users.entities[id])
+            .filter(user => user != null)
+            .map((user) => <User>user)
+            .filter((user) => {
+                // Obican korisnik ne vidi sebe u imeniku.
+                if (!loggedUser) return true;
+                if (loggedUser.role === 'ADMIN') return true;
+                return user.id !== loggedUser.id;
+            });
+    }
 );
 
 export const selectSelectedUserId = createSelector(
