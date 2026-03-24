@@ -45,6 +45,30 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Database (Docker)
+
+Backend koristi PostgreSQL kroz TypeORM konfiguraciju u `typeorm.config.ts`.
+
+Pokretanje baze preko Docker-a (iz root foldera projekta):
+
+```bash
+docker compose up -d
+```
+
+Gašenje baze:
+
+```bash
+docker compose down
+```
+
+Konekcija koju backend koristi:
+
+- host: `localhost`
+- port: `5432`
+- user: `postgres`
+- password: `mysecretpassword`
+- database: `users`
+
 ## Test
 
 ```bash

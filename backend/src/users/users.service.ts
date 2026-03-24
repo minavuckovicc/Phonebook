@@ -18,6 +18,7 @@ export class UsersService {
 
     public getAll() {
         return this.userRepository.find({
+            where: { role: UserRole.USER },
             relations: { additionalInfos: true, phones: true }
         });
     }
@@ -45,7 +46,8 @@ export class UsersService {
         const user = await this.getById(id);
         if (!user) return;
 
-        const phoneIds = (user.phones ?? []).map((p) => p.id);
+        const phoneIds: number[] = [];
+        (user.phones ?? []).forEach((p) => phoneIds.push(p.id));
         const addInfosId = user.additionalInfos?.id;
 
         if (phoneIds.length) {
@@ -88,11 +90,12 @@ export class UsersService {
         let users2: User[] = [];
         const users: User[] = await this.getAll();
         if (string !== "") {
-            users.forEach((user: User) => {
-                let name = user.firstName + " " + user.lastName;
-                name = name.toLowerCase();
-                if (name.indexOf(string) !== -1) users2.push(user);
-            });
+            const query = string.toLowerCase();
+            users2 = users.reduce<User[]>((acc, user: User) => {
+                let name = (user.firstName + " " + user.lastName).toLowerCase();
+                if (name.indexOf(query) !== -1) acc.push(user);
+                return acc;
+            }, []);
             return users2;
         }
         else return users;
